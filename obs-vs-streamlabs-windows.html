@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OBS Studio vs Streamlabs Desktop on Windows: Which Should You Use?</title>
+  <meta name="description" content="OBS Studio vs Streamlabs Desktop on Windows: performance, plugins, ease of use, resources, and recommended use cases. Includes safe official OBS download.">
+  <link rel="canonical" href="https://obs-studio-app.github.io/obs-vs-streamlabs-windows.html">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="OBS Studio vs Streamlabs Desktop on Windows: Which Should You Use?">
+  <meta property="og:description" content="Compare OBS Studio and Streamlabs Desktop for Windows: performance, features, plugins, and best picks.">
+  <meta property="og:url" content="https://obs-studio-app.github.io/obs-vs-streamlabs-windows.html">
+  <meta property="og:image" content="https://obs-studio-app.github.io/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="robots" content="index,follow">
+  <meta name="last-modified" content="">
+
+  <!-- Favicon & Apple -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- GA4 (default consent: denied until user accepts) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MREFSP8YDP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('config', 'G-MREFSP8YDP', { 'anonymize_ip': true });
+  </script>
+
+  <style>
+    :root{
+      --bg:#0f1115; --panel:#0f1720; --muted:#9aa6bb; --text:#e6e8eb; --accent:#5AA6FF; --accent-strong:#73B5FF; --success:#4ade80; --border:#1f2633; --focus:#FFD665;
+      --max-width:1100px; --radius:10px; --gap:18px; --container-padding:20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;background:linear-gradient(180deg,var(--bg),#0b0d10);color:var(--text);margin:0}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-strong)}
+    .wrap{max-width:var(--max-width);margin:24px auto;padding:var(--container-padding)}
+    header{display:flex;align-items:center;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav{margin-left:auto}
+    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
+    nav a{padding:8px 10px;border-radius:8px;background:transparent}
+    nav a:focus{outline:3px solid var(--focus);outline-offset:2px}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
+    @media(max-width:900px){main{grid-template-columns:1fr} .sidebar{order:2}}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--border);padding:18px;border-radius:var(--radius)}
+    .hero{display:flex;flex-direction:column;gap:14px}
+    .small{font-size:13px;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+    .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#041025;padding:12px 16px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+    .btn:hover{background:var(--accent-strong)}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px}
+
+    .grid{display:grid;gap:14px}
+    @media(min-width:920px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid var(--border);text-align:left}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+
+    .svgic{width:18px;height:18px;vertical-align:middle}
+
+    /* cookie banner */
+    .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;background:linear-gradient(180deg,#0f1621, #07101a);border:1px solid var(--border);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:999}
+    .cookie-banner p{margin:0;color:var(--muted);font-size:14px}
+    .cookie-actions{margin-left:auto;display:flex;gap:8px}
+  </style>
+
+  <!-- Structured Data: ItemList comparison + FAQ + Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"OBS Studio vs Streamlabs Desktop (Windows)",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "OBS Studio (Windows)",
+          "operatingSystem": ["Windows 11 (64-bit)", "Windows 10 (64-bit)"],
+          "applicationCategory": "MultimediaApplication",
+          "softwareVersion": "32.1.2",
+          "offers": {"@type":"Offer","price":"0.00","priceCurrency":"USD"}
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Streamlabs Desktop (Windows)",
+          "operatingSystem": ["Windows 11 (64-bit)", "Windows 10 (64-bit)"],
+          "applicationCategory": "MultimediaApplication"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Which is lighter on performance?","acceptedAnswer":{"@type":"Answer","text":"OBS Studio typically uses fewer resources than all-in-one suites. It performs especially well with NVENC/QSV/AMF hardware encoders on Windows."}},
+      {"@type":"Question","name":"Which has better plugin support?","acceptedAnswer":{"@type":"Answer","text":"OBS Studio has broad, community-driven plugin support and is open-source. Many advanced filters and tools target OBS first."}},
+      {"@type":"Question","name":"Which is easier for beginners?","acceptedAnswer":{"@type":"Answer","text":"Streamlabs Desktop offers integrated onboarding, themes, and monetization tools. OBS Studio is leaner but requires manual setup; our guides can help you get started quickly."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://obs-studio-app.github.io"},
+      {"@type":"ListItem","position":2,"name":"Compare","item":"https://obs-studio-app.github.io/obs-vs-streamlabs-windows.html"}
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="OBS Studio for Windows">
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5AA6FF" />
+              <stop offset="1" stop-color="#3AAAAF" />
+            </linearGradient>
+          </defs>
+          <rect width="100%" height="100%" rx="6" fill="url(#g)"></rect>
+          <text x="12" y="16" font-size="10" font-family="Arial" text-anchor="middle" fill="#041025">OBS</text>
+        </svg>
+        <div>
+          <h1>OBS Studio vs Streamlabs Desktop</h1>
+          <div class="small muted">Windows comparison • Performance, plugins, and ease of use</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Download</a></li>
+          <li><a href="install-obs-studio-windows.html">Install</a></li>
+          <li><a href="obs-studio-best-settings-windows.html">Best Settings</a></li>
+          <li><a href="obs-studio-troubleshooting-windows.html">Troubleshooting</a></li>
+          <li><a href="obs-studio-plugins-windows.html">Plugins</a></li>
+          <li><a href="obs-studio-low-end-windows.html">Low‑End</a></li>
+          <li><a href="obs-vs-streamlabs-windows.html" aria-current="page">Compare</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card hero">
+        <div class="meta">
+          <svg class="svgic" aria-hidden><use href="#icon-compare"></use></svg>
+          <div class="small">Windows 10/11 (64‑bit) • Neutral overview</div>
+        </div>
+        <h2>Which should you use on Windows?</h2>
+        <p class="muted">Pick the tool that fits your workflow. OBS Studio is lean, flexible, and highly performant. Streamlabs Desktop bundles extras that help beginners ramp up quickly.</p>
+
+        <div class="cta">
+          <a class="btn" id="download-btn" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">Download OBS Studio (Windows x64)</a>
+          <a class="btn-ghost" href="obs-studio-best-settings-windows.html">Best Settings</a>
+          <a class="btn-ghost" href="obs-studio-plugins-windows.html">Plugins</a>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3 style="margin:0 0 8px">OBS Studio — Pros</h3>
+            <ul class="small">
+              <li>Open-source, free, and lightweight; excellent performance with NVENC/QSV/AMF.</li>
+              <li>Extensive plugin ecosystem and community support.</li>
+              <li>Fine-grained control over scenes, filters, and encoding.</li>
+            </ul>
+            <h3 style="margin:12px 0 8px">OBS Studio — Cons</h3>
+            <ul class="small">
+              <li>Manual setup; steeper learning curve for new users.</li>
+              <li>Fewer bundled themes/overlays out of the box.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">Streamlabs Desktop — Pros</h3>
+            <ul class="small">
+              <li>Streamlined onboarding with themes, widgets, and integrated tools.</li>
+              <li>Built-in monetization and alert systems for creators.</li>
+            </ul>
+            <h3 style="margin:12px 0 8px">Streamlabs Desktop — Cons</h3>
+            <ul class="small">
+              <li>Heavier on resources compared to OBS Studio.</li>
+              <li>Less flexible plugin ecosystem; some features behind services.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px">Recommendations</h3>
+          <ul class="small">
+            <li><strong>Gaming streams on mid/high-end PCs:</strong> Use OBS Studio with NVENC (new) or x264 tuned for quality.</li>
+            <li><strong>Low-end PCs:</strong> Prefer OBS Studio with 720p30 presets and hardware encoders when possible.</li>
+            <li><strong>Beginners needing a fast start:</strong> Streamlabs Desktop can be convenient; you can switch to OBS later for more control.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin-top:0">Quick FAQ</h3>
+          <p><strong>Q:</strong> Which is better for performance?<br><strong>A:</strong> OBS Studio generally, especially with NVENC/QSV/AMF.</p>
+          <p><strong>Q:</strong> Which is easier for first-time setup?<br><strong>A:</strong> Streamlabs Desktop, due to integrated onboarding and widgets.</p>
+          <p><strong>Q:</strong> Can I migrate from Streamlabs to OBS?<br><strong>A:</strong> Yes. You can recreate scenes and sources; many guides exist to help with the transition.</p>
+        </div>
+      </section>
+
+      <aside class="sidebar card">
+        <div>
+          <strong>Need the installer?</strong>
+          <div class="small muted">OBS-Studio-32.1.2-Windows-x64-Installer.exe</div>
+          <a class="btn" id="download-side" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">
+            <svg class="svgic" aria-hidden><use href="#icon-download"></use></svg> Download (Official)
+          </a>
+          <div class="small muted" style="margin-top:8px">Windows 10/11 (64‑bit) • No adware</div>
+          <div style="margin-top:10px">
+            <div class="small muted">Share link</div>
+            <input aria-label="Download link" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;background:#081018;border:1px solid var(--border);color:var(--muted)" value="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" readonly onclick="this.select()">
+          </div>
+        </div>
+
+        <div style="margin-top:14px" class="card small muted">
+          <div>Last updated: <time id="lastmod"></time></div>
+          <div style="margin-top:6px">Version: <strong>32.1.2</strong></div>
+          <div style="margin-top:6px">See also: <a href="obs-studio-best-settings-windows.html">Best Settings</a> • <a href="obs-studio-low-end-windows.html">Low‑End PCs</a></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small muted">© OBS Project — this page links to the official installer. We do not host or modify the executable. Privacy & policy available on the official site.</div>
+    </footer>
+  </div>
+
+  <!-- SVG sprite -->
+  <svg style="display:none">
+    <symbol id="icon-download" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h6V9h3.67L12 2z"/></symbol>
+    <symbol id="icon-compare" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3H5a2 2 0 0 0-2 2v12h2V5h5V3zm9 2h-5v2h5v10h-5v2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8 7l4 5-4 5V7z"/></symbol>
+  </svg>
+
+  <!-- Cookie banner -->
+  <div id="cookie" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="display:none">
+    <div>
+      <strong>We use cookies</strong>
+      <p style="margin:6px 0 0">Analytics are used to improve this site. Accept to enable GA4. You can decline — the download will still work.</p>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn">Accept</button>
+      <button id="cookie-decline" class="btn-ghost">Decline</button>
+      <button id="cookie-close" class="btn-ghost" aria-label="Close cookie banner">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Installer details
+    const FILE_NAME = 'OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+    const FILE_URL = 'https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+
+    // Track download event
+    function trackDownload(e){
+      try{
+        gtag('event','file_download',{event_category:'downloads', event_label:FILE_NAME, file_url:FILE_URL});
+      }catch(err){console.warn('gtag not available',err)}
+    }
+
+    // Cookie consent logic
+    const banner = document.getElementById('cookie');
+    const ACCEPT = document.getElementById('cookie-accept');
+    const DECLINE = document.getElementById('cookie-decline');
+    const CLOSE = document.getElementById('cookie-close');
+
+    function setConsent(value){
+      localStorage.setItem('cookie_consent', value);
+      if(value === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else {
+        try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){}
+      }
+      banner.style.display = 'none';
+    }
+
+    ACCEPT.addEventListener('click',()=> setConsent('accepted'));
+    DECLINE.addEventListener('click',()=> setConsent('declined'));
+    CLOSE.addEventListener('click',()=> banner.style.display='none');
+
+    (function(){
+      const consent = localStorage.getItem('cookie_consent');
+      if(!consent){ banner.style.display = 'flex'; }
+      else if(consent === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else { try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){} }
+    })();
+
+    // last modified
+    (function(){
+      const t = document.getElementById('lastmod');
+      if(t){ t.textContent = document.lastModified || new Date().toISOString().split('T')[0]; }
+      const m = document.querySelector('meta[name="last-modified"]');
+      if(m){ m.setAttribute('content', document.lastModified || new Date().toISOString()); }
+    })();
+  </script>
+
+</body>
+</html>

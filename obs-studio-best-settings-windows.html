@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Best OBS Studio Settings for Streaming and Recording (Windows)</title>
+  <meta name="description" content="Best OBS Studio settings for Windows 10/11: NVENC vs x264, recommended bitrates, keyframes, scaling, audio, and recording presets. Safe official download.">
+  <link rel="canonical" href="https://obs-studio-app.github.io/obs-studio-best-settings-windows.html">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Best OBS Studio Settings for Streaming and Recording (Windows)">
+  <meta property="og:description" content="NVENC vs x264, recommended bitrates, keyframes, scaling, audio, and recording presets for Windows.">
+  <meta property="og:url" content="https://obs-studio-app.github.io/obs-studio-best-settings-windows.html">
+  <meta property="og:image" content="https://obs-studio-app.github.io/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="robots" content="index,follow">
+  <meta name="last-modified" content="">
+
+  <!-- Favicon & Apple -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- GA4 (default consent: denied until user accepts) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MREFSP8YDP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('config', 'G-MREFSP8YDP', { 'anonymize_ip': true });
+  </script>
+
+  <style>
+    :root{
+      --bg:#0f1115; --panel:#0f1720; --muted:#9aa6bb; --text:#e6e8eb; --accent:#5AA6FF; --accent-strong:#73B5FF; --success:#4ade80; --border:#1f2633; --focus:#FFD665;
+      --max-width:1100px; --radius:10px; --gap:18px; --container-padding:20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;background:linear-gradient(180deg,var(--bg),#0b0d10);color:var(--text);margin:0}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-strong)}
+    .wrap{max-width:var(--max-width);margin:24px auto;padding:var(--container-padding)}
+    header{display:flex;align-items:center;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav{margin-left:auto}
+    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
+    nav a{padding:8px 10px;border-radius:8px;background:transparent}
+    nav a:focus{outline:3px solid var(--focus);outline-offset:2px}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
+    @media(max-width:900px){main{grid-template-columns:1fr} .sidebar{order:2}}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--border);padding:18px;border-radius:var(--radius)}
+    .hero{display:flex;flex-direction:column;gap:14px}
+    .small{font-size:13px;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+    .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#041025;padding:12px 16px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+    .btn:hover{background:var(--accent-strong)}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px}
+
+    .grid{display:grid;gap:14px}
+    @media(min-width:920px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid var(--border);text-align:left}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+
+    .svgic{width:18px;height:18px;vertical-align:middle}
+
+    /* cookie banner */
+    .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;background:linear-gradient(180deg,#0f1621, #07101a);border:1px solid var(--border);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:999}
+    .cookie-banner p{margin:0;color:var(--muted);font-size:14px}
+    .cookie-actions{margin-left:auto;display:flex;gap:8px}
+  </style>
+
+  <!-- Structured Data: HowTo + FAQ + Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"Best OBS Studio Settings for Streaming and Recording (Windows)",
+    "about":{
+      "@type":"SoftwareApplication",
+      "name":"OBS Studio for Windows",
+      "softwareVersion":"32.1.2",
+      "operatingSystem":["Windows 11 (64-bit)","Windows 10 (64-bit)"],
+      "applicationCategory":"MultimediaApplication"
+    },
+    "totalTime":"PT5M",
+    "step":[
+      {"@type":"HowToStep","name":"Choose your encoder","text":"Prefer NVENC (new) if you have an NVIDIA GPU; otherwise x264 on CPU. AMD users can try AMF; Intel iGPUs can use QSV."},
+      {"@type":"HowToStep","name":"Set streaming bitrate","text":"Use CBR. 1080p60: 6,000 Kbps (Twitch cap) to ~9,000 Kbps (YouTube). 1080p30: 4,500–6,000. 720p60: 3,000–4,500."},
+      {"@type":"HowToStep","name":"Keyframe interval & preset","text":"Keyframe interval 2s for most platforms. NVENC preset: Quality (or Performance on low‑end). x264 preset: veryfast (or faster CPUs: fast)."},
+      {"@type":"HowToStep","name":"Scaling & FPS","text":"Output scale 1920×1080 or 1280×720. Start with 60 FPS for fast action; 30 FPS reduces bitrate needs."},
+      {"@type":"HowToStep","name":"Audio settings","text":"Sample rate 48 kHz. Track bitrate 160–320 Kbps for streaming; 320 Kbps for VODs."},
+      {"@type":"HowToStep","name":"Recording presets","text":"Use MKV container; for NVENC use CQP 18–22. For x264, CRF 18–23. Recording encoder can be different from streaming."}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What bitrate should I use for 1080p?","acceptedAnswer":{"@type":"Answer","text":"For streaming: 1080p60 around 6,000 Kbps for Twitch (platform cap) and up to ~9,000 Kbps for YouTube. 1080p30 works at 4,500–6,000 Kbps."}},
+      {"@type":"Question","name":"Is NVENC better than x264?","acceptedAnswer":{"@type":"Answer","text":"On supported NVIDIA GPUs, NVENC (new) offloads encoding to the GPU and is often preferred for gaming streams. x264 can provide quality at lower bitrates on powerful CPUs but uses more CPU."}},
+      {"@type":"Question","name":"What keyframe interval should I use?","acceptedAnswer":{"@type":"Answer","text":"Most platforms recommend a keyframe interval of 2 seconds for best compatibility with VODs and live streaming."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://obs-studio-app.github.io"},
+      {"@type":"ListItem","position":2,"name":"Best Settings","item":"https://obs-studio-app.github.io/obs-studio-best-settings-windows.html"}
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="OBS Studio for Windows">
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5AA6FF" />
+              <stop offset="1" stop-color="#3AAAAF" />
+            </linearGradient>
+          </defs>
+          <rect width="100%" height="100%" rx="6" fill="url(#g)"></rect>
+          <text x="12" y="16" font-size="10" font-family="Arial" text-anchor="middle" fill="#041025">OBS</text>
+        </svg>
+        <div>
+          <h1>Best OBS Studio Settings (Windows)</h1>
+          <div class="small muted">Windows 10/11 • Version 32.1.2 • Streaming & Recording</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Download</a></li>
+          <li><a href="install-obs-studio-windows.html">Install</a></li>
+          <li><a href="obs-studio-best-settings-windows.html" aria-current="page">Best Settings</a></li>
+          <li><a href="obs-studio-troubleshooting-windows.html">Troubleshooting</a></li>
+          <li><a href="obs-studio-plugins-windows.html">Plugins</a></li>
+          <li><a href="obs-studio-low-end-windows.html">Low‑End</a></li>
+          <li><a href="obs-vs-streamlabs-windows.html">Compare</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card hero">
+        <div class="meta">
+          <svg class="svgic" aria-hidden><use href="#icon-settings"></use></svg>
+          <div class="small">Optimized presets • Windows 10/11 (64‑bit)</div>
+        </div>
+        <h2>Best OBS Studio Settings for Streaming and Recording</h2>
+        <p class="muted">A clear, battle‑tested setup for Windows PCs. Choose the right encoder, bitrate, and scaling. Start with these defaults and tweak from there.</p>
+
+        <div class="cta">
+          <a class="btn" id="download-btn" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">Download OBS Studio (Windows x64)</a>
+          <a class="btn-ghost" href="install-obs-studio-windows.html">Install Guide</a>
+          <a class="btn-ghost" href="obs-studio-troubleshooting-windows.html">Troubleshooting</a>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin-top:0">Key takeaways</h3>
+          <ul class="small">
+            <li>Prefer <strong>NVENC (new)</strong> on NVIDIA GPUs; otherwise <strong>x264</strong> on CPU.</li>
+            <li>Use <strong>CBR</strong> for streaming; start with <strong>6,000 Kbps @ 1080p60</strong> (platform caps may apply).</li>
+            <li><strong>Keyframe</strong> = 2s; <strong>NVENC preset</strong> = Quality; <strong>x264</strong> = veryfast.</li>
+            <li><strong>Scale</strong> to 1920×1080 or 1280×720; try <strong>60 FPS</strong> for action, 30 FPS for lower bitrates.</li>
+            <li>Recording: <strong>MKV</strong>, NVENC <strong>CQP 18–22</strong> or x264 <strong>CRF 18–23</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Encoders: NVENC vs x264</h3>
+            <p class="small">Settings → Output → Streaming</p>
+            <ul class="small">
+              <li><strong>NVENC (new):</strong> Best for NVIDIA GPUs. Preset <em>Quality</em>, Profile <em>High</em>, Look‑ahead off (unless bandwidth is tight), Psycho Visual Tuning on.</li>
+              <li><strong>x264 (CPU):</strong> Preset <em>veryfast</em>. If CPU is strong, try <em>faster</em>. Keep keyframe = 2s.</li>
+              <li><strong>AMD AMF / Intel QSV:</strong> Similar to NVENC: use quality‑oriented preset and keyframe 2s.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">Streaming bitrates (CBR)</h3>
+            <table class="small">
+              <thead><tr><th>Resolution / FPS</th><th>Recommended bitrate</th></tr></thead>
+              <tbody>
+                <tr><td>1080p60</td><td>~6,000 Kbps (Twitch cap) to 8–9 Mbps (YouTube)</td></tr>
+                <tr><td>1080p30</td><td>4,500–6,000 Kbps</td></tr>
+                <tr><td>720p60</td><td>3,000–4,500 Kbps</td></tr>
+                <tr><td>720p30</td><td>2,500–3,500 Kbps</td></tr>
+              </tbody>
+            </table>
+            <p class="small muted">Note: Platforms may enforce caps or recommend ranges. Adjust based on your upload bandwidth and content motion.</p>
+          </div>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Keyframe, preset, profile</h3>
+            <ul class="small">
+              <li><strong>Keyframe interval:</strong> 2 seconds</li>
+              <li><strong>NVENC preset:</strong> Quality (Performance on low‑end)</li>
+              <li><strong>Profile:</strong> High</li>
+              <li><strong>Rate control:</strong> CBR for streaming</li>
+              <li><strong>Max B‑frames:</strong> 2 (default)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">Scaling & FPS</h3>
+            <ul class="small">
+              <li><strong>Base (Canvas):</strong> Your monitor/game resolution</li>
+              <li><strong>Output (Scaled):</strong> 1920×1080 or 1280×720</li>
+              <li><strong>Downscale filter:</strong> Lanczos (36 samples) or Bicubic</li>
+              <li><strong>FPS:</strong> 60 for action; 30 for lower bitrates</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Audio</h3>
+            <ul class="small">
+              <li><strong>Sample rate:</strong> 48 kHz</li>
+              <li><strong>Tracks:</strong> Use separate tracks for mic and desktop if your platform supports it</li>
+              <li><strong>Bitrate (stream):</strong> 160–320 Kbps</li>
+              <li><strong>Bitrate (VOD):</strong> 320 Kbps</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">Recording (VOD)</h3>
+            <ul class="small">
+              <li><strong>Container:</strong> MKV (safer), then <em>Remux</em> to MP4 if needed</li>
+              <li><strong>Encoder:</strong> NVENC with <strong>CQP 18–22</strong> (lower = higher quality)</li>
+              <li><strong>x264 alternative:</strong> <strong>CRF 18–23</strong></li>
+              <li><strong>Rate control:</strong> CQP/CRF for quality‑based recording</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px">Troubleshooting quick tips</h3>
+          <ul class="small">
+            <li>Stutters or high CPU? Lower x264 preset or switch to NVENC/QSV/AMF.</li>
+            <li>Limited upload? Drop resolution to 720p or lower FPS to 30.</li>
+            <li>Black screen on Game Capture? See <a href="obs-studio-troubleshooting-windows.html">Troubleshooting</a>.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin-top:0">Quick FAQ</h3>
+          <p><strong>Q:</strong> What's the best encoder?<br><strong>A:</strong> NVENC (new) on NVIDIA GPUs. Otherwise x264 with a reasonable preset (veryfast).</p>
+          <p><strong>Q:</strong> What bitrate for Twitch?<br><strong>A:</strong> Commonly 6,000 Kbps max for 1080p60; consider 1080p30 or 720p60 if bandwidth is limited.</p>
+          <p><strong>Q:</strong> What keyframe interval?<br><strong>A:</strong> 2 seconds for most platforms.</p>
+        </div>
+      </section>
+
+      <aside class="sidebar card">
+        <div>
+          <strong>Need the installer?</strong>
+          <div class="small muted">OBS-Studio-32.1.2-Windows-x64-Installer.exe</div>
+          <a class="btn" id="download-side" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">
+            <svg class="svgic" aria-hidden><use href="#icon-download"></use></svg> Download (Official)
+          </a>
+          <div class="small muted" style="margin-top:8px">Windows 10/11 (64‑bit) • No adware</div>
+          <div style="margin-top:10px">
+            <div class="small muted">Share link</div>
+            <input aria-label="Download link" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;background:#081018;border:1px solid var(--border);color:var(--muted)" value="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" readonly onclick="this.select()">
+          </div>
+        </div>
+
+        <div style="margin-top:14px" class="card small muted">
+          <div>Last updated: <time id="lastmod"></time></div>
+          <div style="margin-top:6px">Version: <strong>32.1.2</strong></div>
+          <div style="margin-top:6px">See also: <a href="obs-studio-plugins-windows.html">Plugins</a> • <a href="obs-studio-low-end-windows.html">Low‑End PCs</a></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small muted">© OBS Project — this page links to the official installer. We do not host or modify the executable. Privacy & policy available on the official site.</div>
+    </footer>
+  </div>
+
+  <!-- SVG sprite -->
+  <svg style="display:none">
+    <symbol id="icon-download" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h6V9h3.67L12 2z"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14,12.94a7.43,7.43,0,0,0,.05-1,7.43,7.43,0,0,0-.05-1l2.11-1.65a.5.5,0,0,0,.12-.64l-2-3.46a.5.5,0,0,0-.6-.22l-2.49,1a7.28,7.28,0,0,0-1.73-1l-.38-2.65A.5.5,0,0,0,13.5,2h-4a.5.5,0,0,0-.5.42L8.62,5.07a7.28,7.28,0,0,0-1.73,1l-2.49-1a.5.5,0,0,0-.6.22l-2,3.46a.5.5,0,0,0,.12.64L4,10.94a7.43,7.43,0,0,0,0,2L1.88,14.59a.5.5,0,0,0-.12.64l2,3.46a.5.5,0,0,0,.6.22l2.49-1a7.28,7.28,0,0,0,1.73,1l.38,2.65A.5.5,0,0,0,9.5,22h4a.5.5,0,0,0,.5-.42l.38-2.65a7.28,7.28,0,0,0,1.73-1l2.49,1a.5.5,0,0,0,.6-.22l2-3.46a.5.5,0,0,0-.12-.64ZM12,15.5A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></symbol>
+  </svg>
+
+  <!-- Cookie banner -->
+  <div id="cookie" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="display:none">
+    <div>
+      <strong>We use cookies</strong>
+      <p style="margin:6px 0 0">Analytics are used to improve this site. Accept to enable GA4. You can decline — the download will still work.</p>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn">Accept</button>
+      <button id="cookie-decline" class="btn-ghost">Decline</button>
+      <button id="cookie-close" class="btn-ghost" aria-label="Close cookie banner">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Installer details
+    const FILE_NAME = 'OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+    const FILE_URL = 'https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+
+    // Track download event
+    function trackDownload(e){
+      try{
+        gtag('event','file_download',{event_category:'downloads', event_label:FILE_NAME, file_url:FILE_URL});
+      }catch(err){console.warn('gtag not available',err)}
+    }
+
+    // Cookie consent logic
+    const banner = document.getElementById('cookie');
+    const ACCEPT = document.getElementById('cookie-accept');
+    const DECLINE = document.getElementById('cookie-decline');
+    const CLOSE = document.getElementById('cookie-close');
+
+    function setConsent(value){
+      localStorage.setItem('cookie_consent', value);
+      if(value === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else {
+        try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){}
+      }
+      banner.style.display = 'none';
+    }
+
+    ACCEPT.addEventListener('click',()=> setConsent('accepted'));
+    DECLINE.addEventListener('click',()=> setConsent('declined'));
+    CLOSE.addEventListener('click',()=> banner.style.display='none');
+
+    (function(){
+      const consent = localStorage.getItem('cookie_consent');
+      if(!consent){ banner.style.display = 'flex'; }
+      else if(consent === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else { try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){} }
+    })();
+
+    // last modified
+    (function(){
+      const t = document.getElementById('lastmod');
+      if(t){ t.textContent = document.lastModified || new Date().toISOString().split('T')[0]; }
+      const m = document.querySelector('meta[name="last-modified"]');
+      if(m){ m.setAttribute('content', document.lastModified || new Date().toISOString()); }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>How to Install and Set Up OBS Studio on Windows 11/10</title>
+  <meta name="description" content="Step-by-step guide to install and set up OBS Studio on Windows 11/10. Safe official download, quick setup, first stream/record test, and troubleshooting tips.">
+  <link rel="canonical" href="https://obs-studio-app.github.io/install-obs-studio-windows.html">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Install and Set Up OBS Studio on Windows 11/10">
+  <meta property="og:description" content="Step-by-step guide to install and set up OBS Studio on Windows 11/10. Safe official download and quick setup.">
+  <meta property="og:url" content="https://obs-studio-app.github.io/install-obs-studio-windows.html">
+  <meta property="og:image" content="https://obs-studio-app.github.io/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="robots" content="index,follow">
+  <meta name="last-modified" content="">
+
+  <!-- Favicon & Apple -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- GA4 (default consent: denied until user accepts) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MREFSP8YDP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('config', 'G-MREFSP8YDP', { 'anonymize_ip': true });
+  </script>
+
+  <style>
+    :root{
+      --bg:#0f1115; --panel:#0f1720; --muted:#9aa6bb; --text:#e6e8eb; --accent:#5AA6FF; --accent-strong:#73B5FF; --success:#4ade80; --border:#1f2633; --focus:#FFD665;
+      --max-width:1100px; --radius:10px; --gap:18px; --container-padding:20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;background:linear-gradient(180deg,var(--bg),#0b0d10);color:var(--text);margin:0}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-strong)}
+    .wrap{max-width:var(--max-width);margin:24px auto;padding:var(--container-padding)}
+    header{display:flex;align-items:center;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav{margin-left:auto}
+    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
+    nav a{padding:8px 10px;border-radius:8px;background:transparent}
+    nav a:focus{outline:3px solid var(--focus);outline-offset:2px}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
+    @media(max-width:900px){main{grid-template-columns:1fr} .sidebar{order:2}}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--border);padding:18px;border-radius:var(--radius)}
+    .hero{display:flex;flex-direction:column;gap:14px}
+    .small{font-size:13px;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+    .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#041025;padding:12px 16px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+    .btn:hover{background:var(--accent-strong)}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px}
+
+    .howto{counter-reset: step}
+    .step{display:flex;gap:12px;margin:14px 0;padding:14px;border:1px solid var(--border);border-radius:10px;background:#0c141f}
+    .steplabel{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#08101a;border:1px solid var(--border);font-weight:700;color:#b9c7db}
+    .step h3{margin:0 0 8px;font-size:18px}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+
+    .svgic{width:18px;height:18px;vertical-align:middle}
+
+    /* cookie banner */
+    .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;background:linear-gradient(180deg,#0f1621, #07101a);border:1px solid var(--border);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:999}
+    .cookie-banner p{margin:0;color:var(--muted);font-size:14px}
+    .cookie-actions{margin-left:auto;display:flex;gap:8px}
+  </style>
+
+  <!-- Structured Data: HowTo + FAQ + Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"Install and Set Up OBS Studio on Windows 11/10",
+    "about":{
+      "@type":"SoftwareApplication",
+      "name":"OBS Studio for Windows",
+      "softwareVersion":"32.1.2",
+      "operatingSystem":["Windows 11 (64-bit)","Windows 10 (64-bit)"],
+      "applicationCategory":"MultimediaApplication"
+    },
+    "totalTime":"PT10M",
+    "estimatedCost":{
+      "@type":"MonetaryAmount","currency":"USD","value":"0"
+    },
+    "supply":[{"@type":"HowToSupply","name":"Windows 10/11 64-bit PC"},{"@type":"HowToSupply","name":"Internet connection"}],
+    "tool":[{"@type":"HowToTool","name":"Administrator account"}],
+    "step":[
+      {"@type":"HowToStep","name":"Download the official installer","url":"https://obs-studio-app.github.io/install-obs-studio-windows.html#step-1","text":"Click Download to get the official OBS Studio 32.1.2 installer from the OBS CDN. Save the .exe to your PC."},
+      {"@type":"HowToStep","name":"Run the installer","url":"https://obs-studio-app.github.io/install-obs-studio-windows.html#step-2","text":"Double‑click the .exe. Allow the UAC prompt. Choose your language, read the license, and proceed with default options."},
+      {"@type":"HowToStep","name":"Finish setup and launch OBS","url":"https://obs-studio-app.github.io/install-obs-studio-windows.html#step-3","text":"Click Install and wait for completion. Launch OBS Studio from the Start menu or the desktop shortcut."},
+      {"@type":"HowToStep","name":"Run Auto‑Configuration Wizard","url":"https://obs-studio-app.github.io/install-obs-studio-windows.html#step-4","text":"In OBS, go to Tools → Auto‑Configuration Wizard. Choose optimize for streaming or recording, then apply suggested settings."},
+      {"@type":"HowToStep","name":"Add sources and test","url":"https://obs-studio-app.github.io/install-obs-studio-windows.html#step-5","text":"Add Display or Game Capture and your audio devices. Start a short recording or a private stream to verify audio/video."}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Is this the official OBS Studio download?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Download button links directly to the official OBS Project CDN. No bundles or adware."}},
+      {"@type":"Question","name":"Do I need Windows 64‑bit?","acceptedAnswer":{"@type":"Answer","text":"Yes. OBS Studio 32.1.2 supports Windows 10 and Windows 11 (64‑bit)."}},
+      {"@type":"Question","name":"Will OBS install dependencies automatically?","acceptedAnswer":{"@type":"Answer","text":"If required, the installer will prompt to install needed dependencies (e.g., runtime components)."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://obs-studio-app.github.io"},
+      {"@type":"ListItem","position":2,"name":"Install","item":"https://obs-studio-app.github.io/install-obs-studio-windows.html"}
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="OBS Studio for Windows">
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5AA6FF" />
+              <stop offset="1" stop-color="#3AAAAF" />
+            </linearGradient>
+          </defs>
+          <rect width="100%" height="100%" rx="6" fill="url(#g)"></rect>
+          <text x="12" y="16" font-size="10" font-family="Arial" text-anchor="middle" fill="#041025">OBS</text>
+        </svg>
+        <div>
+          <h1>Install OBS Studio (Windows 11/10)</h1>
+          <div class="small muted">Official guide • Version 32.1.2 • No bundles</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Download</a></li>
+          <li><a href="install-obs-studio-windows.html" aria-current="page">Install</a></li>
+          <li><a href="obs-studio-best-settings-windows.html">Best Settings</a></li>
+          <li><a href="obs-studio-troubleshooting-windows.html">Troubleshooting</a></li>
+          <li><a href="obs-studio-plugins-windows.html">Plugins</a></li>
+          <li><a href="obs-studio-low-end-windows.html">Low‑End</a></li>
+          <li><a href="obs-vs-streamlabs-windows.html">Compare</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card hero">
+        <div class="meta">
+          <svg class="svgic" aria-hidden><use href="#icon-info"></use></svg>
+          <div class="small">5–10 minutes • Windows 10/11 (64‑bit)</div>
+        </div>
+        <h2>How to Install and Set Up OBS Studio</h2>
+        <p class="muted">Follow these quick steps to install OBS Studio on Windows and perform the first‑time setup. If you only need the installer, grab it below.</p>
+
+        <div class="cta">
+          <a class="btn" id="download-btn" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">
+            Download OBS Studio (Windows x64)
+          </a>
+          <a class="btn-ghost" href="obs-studio-best-settings-windows.html">View Best Settings</a>
+          <a class="btn-ghost" href="obs-studio-troubleshooting-windows.html">Troubleshooting</a>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin-top:0">Before you begin</h3>
+          <ul class="small">
+            <li>Windows 10 or 11 (64‑bit)</li>
+            <li>Administrator rights for installation</li>
+            <li>Optional: Update your GPU drivers (NVIDIA/AMD/Intel) for best performance</li>
+          </ul>
+        </div>
+
+        <div class="howto" style="margin-top:14px">
+          <div id="step-1" class="step">
+            <div class="steplabel">1</div>
+            <div>
+              <h3>Download the official installer</h3>
+              <p>Click the button above to download <strong>OBS-Studio-32.1.2-Windows-x64-Installer.exe</strong> from the official OBS CDN. Save it to your PC.</p>
+              <p class="small muted">No bundles or adware. You can verify checksums on the official OBS site.</p>
+            </div>
+          </div>
+          <div id="step-2" class="step">
+            <div class="steplabel">2</div>
+            <div>
+              <h3>Run the installer</h3>
+              <p>Double‑click the .exe and allow the Windows UAC prompt. Choose your language, review the license, and follow the on‑screen steps.</p>
+              <ul class="small">
+                <li>Use the default install location unless you have a reason to change it.</li>
+                <li>If prompted, allow the installer to add required runtime components.</li>
+              </ul>
+            </div>
+          </div>
+          <div id="step-3" class="step">
+            <div class="steplabel">3</div>
+            <div>
+              <h3>Launch OBS Studio</h3>
+              <p>Start OBS from the Start menu (or the desktop shortcut). On first launch, you can run the <em>Auto‑Configuration Wizard</em>.</p>
+            </div>
+          </div>
+          <div id="step-4" class="step">
+            <div class="steplabel">4</div>
+            <div>
+              <h3>Run Auto‑Configuration Wizard</h3>
+              <p>Go to <strong>Tools → Auto‑Configuration Wizard</strong>. Choose whether to optimize for <strong>streaming</strong> or <strong>recording</strong>, then apply the suggested settings.</p>
+              <ul class="small">
+                <li>Streaming: enter your service (YouTube/Twitch) and connect your account or paste a stream key.</li>
+                <li>Recording: choose your recording path in <strong>Settings → Output</strong>.</li>
+              </ul>
+            </div>
+          </div>
+          <div id="step-5" class="step">
+            <div class="steplabel">5</div>
+            <div>
+              <h3>Add sources & test</h3>
+              <p>In the <strong>Sources</strong> panel, add <strong>Display Capture</strong> or <strong>Game Capture</strong>, plus your <strong>Mic/Aux</strong> and <strong>Desktop Audio</strong>.</p>
+              <ul class="small">
+                <li>Use <strong>Start Recording</strong> to make a short test and verify audio and video.</li>
+                <li>For a private streaming test, choose an unlisted stream (YouTube) or a test server.</li>
+              </ul>
+            </div>
+          </div>
+          <div id="step-6" class="step">
+            <div class="steplabel">6</div>
+            <div>
+              <h3>Optional: fine‑tune and extend</h3>
+              <p>Adjust encoders and bitrates in <strong>Settings → Output</strong>, and explore <a href="obs-studio-plugins-windows.html">popular plugins</a> to extend functionality.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin-top:0">Quick FAQ</h3>
+          <p><strong>Q:</strong> Is the installer safe?<br><strong>A:</strong> Yes. The download comes from the official OBS CDN — no bundles.</p>
+          <p><strong>Q:</strong> Do I need admin rights?<br><strong>A:</strong> Yes, to install and register components properly.</p>
+          <p><strong>Q:</strong> Getting a black screen?<br><strong>A:</strong> Check our <a href="obs-studio-troubleshooting-windows.html">Troubleshooting</a> guide for GPU capture tips.</p>
+        </div>
+      </section>
+
+      <aside class="sidebar card">
+        <div>
+          <strong>Need the installer?</strong>
+          <div class="small muted">OBS-Studio-32.1.2-Windows-x64-Installer.exe</div>
+          <a class="btn" id="download-side" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">
+            <svg class="svgic" aria-hidden><use href="#icon-download"></use></svg> Download (Official)
+          </a>
+          <div class="small muted" style="margin-top:8px">Windows 10/11 (64‑bit) • No adware</div>
+          <div style="margin-top:10px">
+            <div class="small muted">Share link</div>
+            <input aria-label="Download link" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;background:#081018;border:1px solid var(--border);color:var(--muted)" value="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" readonly onclick="this.select()">
+          </div>
+        </div>
+
+        <div style="margin-top:14px" class="card small muted">
+          <div>Last updated: <time id="lastmod"></time></div>
+          <div style="margin-top:6px">Version: <strong>32.1.2</strong></div>
+          <div style="margin-top:6px">Need help? See <a href="/">Download</a> and <a href="obs-studio-best-settings-windows.html">Best Settings</a>.</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small muted">© OBS Project — this page links to the official installer. We do not host or modify the executable. Privacy & policy available on the official site.</div>
+    </footer>
+  </div>
+
+  <!-- SVG sprite -->
+  <svg style="display:none">
+    <symbol id="icon-download" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h6V9h3.67L12 2z"/></symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24"><path fill="currentColor" d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z"/><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></symbol>
+  </svg>
+
+  <!-- Cookie banner -->
+  <div id="cookie" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="display:none">
+    <div>
+      <strong>We use cookies</strong>
+      <p style="margin:6px 0 0">Analytics are used to improve this site. Accept to enable GA4. You can decline — the download will still work.</p>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn">Accept</button>
+      <button id="cookie-decline" class="btn-ghost">Decline</button>
+      <button id="cookie-close" class="btn-ghost" aria-label="Close cookie banner">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Installer details
+    const FILE_NAME = 'OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+    const FILE_URL = 'https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+
+    // Track download event
+    function trackDownload(e){
+      try{
+        gtag('event','file_download',{event_category:'downloads', event_label:FILE_NAME, file_url:FILE_URL});
+      }catch(err){console.warn('gtag not available',err)}
+    }
+
+    // Cookie consent logic
+    const banner = document.getElementById('cookie');
+    const ACCEPT = document.getElementById('cookie-accept');
+    const DECLINE = document.getElementById('cookie-decline');
+    const CLOSE = document.getElementById('cookie-close');
+
+    function setConsent(value){
+      localStorage.setItem('cookie_consent', value);
+      if(value === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else {
+        try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){}
+      }
+      banner.style.display = 'none';
+    }
+
+    ACCEPT.addEventListener('click',()=> setConsent('accepted'));
+    DECLINE.addEventListener('click',()=> setConsent('declined'));
+    CLOSE.addEventListener('click',()=> banner.style.display='none');
+
+    (function(){
+      const consent = localStorage.getItem('cookie_consent');
+      if(!consent){ banner.style.display = 'flex'; }
+      else if(consent === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else { try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){} }
+    })();
+
+    // last modified
+    (function(){
+      const t = document.getElementById('lastmod');
+      if(t){ t.textContent = document.lastModified || new Date().toISOString().split('T')[0]; }
+      const m = document.querySelector('meta[name="last-modified"]');
+      if(m){ m.setAttribute('content', document.lastModified || new Date().toISOString()); }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fix OBS Studio on Windows: Black Screen, No Audio, Crashes</title>
+  <meta name="description" content="Troubleshoot OBS Studio on Windows 10/11: fix black screen (Game/Display Capture), no audio, encoder overloaded, crashes, and performance issues.">
+  <link rel="canonical" href="https://obs-studio-app.github.io/obs-studio-troubleshooting-windows.html">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fix OBS Studio on Windows: Black Screen, No Audio, Crashes">
+  <meta property="og:description" content="Step-by-step fixes for common OBS Studio issues on Windows: black screen, audio problems, crashes, and more.">
+  <meta property="og:url" content="https://obs-studio-app.github.io/obs-studio-troubleshooting-windows.html">
+  <meta property="og:image" content="https://obs-studio-app.github.io/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="robots" content="index,follow">
+  <meta name="last-modified" content="">
+
+  <!-- Favicon & Apple -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- GA4 (default consent: denied until user accepts) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MREFSP8YDP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('config', 'G-MREFSP8YDP', { 'anonymize_ip': true });
+  </script>
+
+  <style>
+    :root{
+      --bg:#0f1115; --panel:#0f1720; --muted:#9aa6bb; --text:#e6e8eb; --accent:#5AA6FF; --accent-strong:#73B5FF; --success:#4ade80; --border:#1f2633; --focus:#FFD665;
+      --max-width:1100px; --radius:10px; --gap:18px; --container-padding:20px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;background:linear-gradient(180deg,var(--bg),#0b0d10);color:var(--text);margin:0}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-strong)}
+    .wrap{max-width:var(--max-width);margin:24px auto;padding:var(--container-padding)}
+    header{display:flex;align-items:center;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav{margin-left:auto}
+    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
+    nav a{padding:8px 10px;border-radius:8px;background:transparent}
+    nav a:focus{outline:3px solid var(--focus);outline-offset:2px}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
+    @media(max-width:900px){main{grid-template-columns:1fr} .sidebar{order:2}}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--border);padding:18px;border-radius:var(--radius)}
+    .hero{display:flex;flex-direction:column;gap:14px}
+    .small{font-size:13px;color:var(--muted)}
+    .muted{color:var(--muted)}
+    .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+    .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#041025;padding:12px 16px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
+    .btn:hover{background:var(--accent-strong)}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px}
+
+    .grid{display:grid;gap:14px}
+    @media(min-width:920px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+
+    ul.small{padding-left:18px}
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+
+    .svgic{width:18px;height:18px;vertical-align:middle}
+
+    /* cookie banner */
+    .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;background:linear-gradient(180deg,#0f1621, #07101a);border:1px solid var(--border);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:999}
+    .cookie-banner p{margin:0;color:var(--muted);font-size:14px}
+    .cookie-actions{margin-left:auto;display:flex;gap:8px}
+  </style>
+
+  <!-- Structured Data: HowTo (Black Screen fix) + FAQ + Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"Fix OBS Black Screen on Windows (Game/Display Capture)",
+    "about":{
+      "@type":"SoftwareApplication",
+      "name":"OBS Studio for Windows",
+      "softwareVersion":"32.1.2",
+      "operatingSystem":["Windows 11 (64-bit)","Windows 10 (64-bit)"],
+      "applicationCategory":"MultimediaApplication"
+    },
+    "totalTime":"PT5M",
+    "step":[
+      {"@type":"HowToStep","name":"Assign OBS to the high-performance GPU","text":"On laptops with hybrid graphics, set OBS to use the high-performance GPU (Windows Settings → System → Display → Graphics → Browse OBS → High performance)."},
+      {"@type":"HowToStep","name":"Match capture method to app","text":"Use Display Capture for desktop apps; use Game Capture for fullscreen games. For DX12 games, try Window Capture or run the game in borderless mode."},
+      {"@type":"HowToStep","name":"Disable conflicting overlays","text":"Turn off overlays (Discord, Steam, GeForce Experience, Xbox Game Bar) and any third-party OSD that may hook the game."},
+      {"@type":"HowToStep","name":"Run OBS as administrator","text":"Right-click OBS → Run as administrator to ensure proper capture privileges."}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Why is OBS showing a black screen?","acceptedAnswer":{"@type":"Answer","text":"Common causes include hybrid GPU conflicts, capture method mismatch, or overlays hooking the game. Set OBS to the high‑performance GPU, choose the right capture source, and disable overlays."}},
+      {"@type":"Question","name":"Why is there no audio in OBS?","acceptedAnswer":{"@type":"Answer","text":"Check Settings → Audio for correct devices and sample rate (48 kHz), ensure Windows default devices are correct, and disable exclusive mode in Windows sound device properties if needed."}},
+      {"@type":"Question","name":"How do I fix 'Encoder overloaded'?","acceptedAnswer":{"@type":"Answer","text":"Switch to GPU encoders (NVENC/QSV/AMF), lower x264 preset, reduce output resolution or FPS, and close background tasks."}},
+      {"@type":"Question","name":"OBS keeps crashing — what should I do?","acceptedAnswer":{"@type":"Answer","text":"Update GPU drivers, remove outdated plugins, disable overlays, run OBS as admin, and review the crash log in Help → Log Files to identify conflicts."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://obs-studio-app.github.io"},
+      {"@type":"ListItem","position":2,"name":"Troubleshooting","item":"https://obs-studio-app.github.io/obs-studio-troubleshooting-windows.html"}
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="OBS Studio for Windows">
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5AA6FF" />
+              <stop offset="1" stop-color="#3AAAAF" />
+            </linearGradient>
+          </defs>
+          <rect width="100%" height="100%" rx="6" fill="url(#g)"></rect>
+          <text x="12" y="16" font-size="10" font-family="Arial" text-anchor="middle" fill="#041025">OBS</text>
+        </svg>
+        <div>
+          <h1>OBS Troubleshooting (Windows)</h1>
+          <div class="small muted">Fix black screen, audio, encoder, and crash issues</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Download</a></li>
+          <li><a href="install-obs-studio-windows.html">Install</a></li>
+          <li><a href="obs-studio-best-settings-windows.html">Best Settings</a></li>
+          <li><a href="obs-studio-troubleshooting-windows.html" aria-current="page">Troubleshooting</a></li>
+          <li><a href="obs-studio-plugins-windows.html">Plugins</a></li>
+          <li><a href="obs-studio-low-end-windows.html">Low‑End</a></li>
+          <li><a href="obs-vs-streamlabs-windows.html">Compare</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card hero">
+        <div class="meta">
+          <svg class="svgic" aria-hidden><use href="#icon-warning"></use></svg>
+          <div class="small">Windows 10/11 (64‑bit) • Version 32.1.2</div>
+        </div>
+        <h2>Fix OBS Studio on Windows: Black Screen, No Audio, Crashes</h2>
+        <p class="muted">Try the quick fixes below. Start from the top and test after each change. If you only need the installer, grab it here:</p>
+
+        <div class="cta">
+          <a class="btn" id="download-btn" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">Download OBS Studio (Windows x64)</a>
+          <a class="btn-ghost" href="obs-studio-best-settings-windows.html">Best Settings</a>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Black screen (Game/Display Capture)</h3>
+            <ul class="small">
+              <li><strong>Laptops (hybrid GPU):</strong> Assign OBS to the <em>high‑performance GPU</em> (Windows → System → Display → Graphics → Add OBS → High performance).</li>
+              <li><strong>Match capture:</strong> Use <em>Display Capture</em> for desktop apps, <em>Game Capture</em> for fullscreen games. For DX12 titles, try <em>Window Capture</em> or borderless windowed mode.</li>
+              <li><strong>Disable overlays:</strong> Turn off Discord, Steam, GeForce Experience, Xbox Game Bar overlays, and other hook‑based tools.</li>
+              <li><strong>Run as admin:</strong> Right‑click OBS → Run as administrator.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">No audio (mic/desktop)</h3>
+            <ul class="small">
+              <li><strong>Settings → Audio:</strong> Confirm devices and <em>Sample Rate 48 kHz</em>. Avoid duplicates in <em>Advanced Audio Properties</em>.</li>
+              <li><strong>Windows defaults:</strong> Check <em>Sound → Output/Input</em> defaults and levels; disable <em>Exclusive Mode</em> in device properties if needed.</li>
+              <li><strong>Monitoring:</strong> Use <em>Monitor and Output</em> for mic checks; ensure the correct track is selected for streaming/recording.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Encoder overloaded / High CPU</h3>
+            <ul class="small">
+              <li>Switch to <strong>NVENC</strong> (new), <strong>QSV</strong>, or <strong>AMF</strong> if available.</li>
+              <li>Lower x264 preset (e.g., veryfast → superfast) or reduce <strong>Output (Scaled) Resolution</strong>.</li>
+              <li>Drop to <strong>30 FPS</strong> and close background tasks.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px">Crashes or freezes</h3>
+            <ul class="small">
+              <li>Update GPU drivers (clean install if issues persist).</li>
+              <li>Temporarily remove third‑party plugins; update to latest OBS.</li>
+              <li>Disable overlays and run OBS as administrator.</li>
+              <li>Review <em>Help → Log Files</em> for crash details and conflicts.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px">Quick test checklist</h3>
+          <ul class="small">
+            <li>Create a new <strong>Scene</strong> and add <strong>Display Capture</strong> + <strong>Mic</strong>.</li>
+            <li>Hit <strong>Start Recording</strong> for a 30‑second test; review video and audio levels.</li>
+            <li>If stable, try <strong>Start Streaming</strong> to a private/unlisted target.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin-top:0">Quick FAQ</h3>
+          <p><strong>Q:</strong> Why is my game capture black?<br><strong>A:</strong> Hybrid GPU conflict or incompatible capture. Assign OBS to the high‑performance GPU and switch capture methods.</p>
+          <p><strong>Q:</strong> No mic audio?<br><strong>A:</strong> Set the correct input in Settings → Audio and check Windows device settings. Disable exclusive mode if needed.</p>
+          <p><strong>Q:</strong> Encoder overloaded?<br><strong>A:</strong> Use NVENC/QSV/AMF, or lower x264 preset, resolution, and FPS.</p>
+        </div>
+      </section>
+
+      <aside class="sidebar card">
+        <div>
+          <strong>Need the installer?</strong>
+          <div class="small muted">OBS-Studio-32.1.2-Windows-x64-Installer.exe</div>
+          <a class="btn" id="download-side" href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" target="_blank" rel="noopener" onclick="trackDownload(event)">
+            <svg class="svgic" aria-hidden><use href="#icon-download"></use></svg> Download (Official)
+          </a>
+          <div class="small muted" style="margin-top:8px">Windows 10/11 (64‑bit) • No adware</div>
+          <div style="margin-top:10px">
+            <div class="small muted">Share link</div>
+            <input aria-label="Download link" style="width:100%;margin-top:6px;padding:8px;border-radius:8px;background:#081018;border:1px solid var(--border);color:var(--muted)" value="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe" readonly onclick="this.select()">
+          </div>
+        </div>
+
+        <div style="margin-top:14px" class="card small muted">
+          <div>Last updated: <time id="lastmod"></time></div>
+          <div style="margin-top:6px">Version: <strong>32.1.2</strong></div>
+          <div style="margin-top:6px">See also: <a href="obs-studio-best-settings-windows.html">Best Settings</a> • <a href="obs-studio-low-end-windows.html">Low‑End PCs</a></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small muted">© OBS Project — this page links to the official installer. We do not host or modify the executable. Privacy & policy available on the official site.</div>
+    </footer>
+  </div>
+
+  <!-- SVG sprite -->
+  <svg style="display:none">
+    <symbol id="icon-download" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h6V9h3.67L12 2z"/></symbol>
+    <symbol id="icon-warning" viewBox="0 0 24 24"><path fill="currentColor" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></symbol>
+  </svg>
+
+  <!-- Cookie banner -->
+  <div id="cookie" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="display:none">
+    <div>
+      <strong>We use cookies</strong>
+      <p style="margin:6px 0 0">Analytics are used to improve this site. Accept to enable GA4. You can decline — the download will still work.</p>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="btn">Accept</button>
+      <button id="cookie-decline" class="btn-ghost">Decline</button>
+      <button id="cookie-close" class="btn-ghost" aria-label="Close cookie banner">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Installer details
+    const FILE_NAME = 'OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+    const FILE_URL = 'https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe';
+
+    // Track download event
+    function trackDownload(e){
+      try{
+        gtag('event','file_download',{event_category:'downloads', event_label:FILE_NAME, file_url:FILE_URL});
+      }catch(err){console.warn('gtag not available',err)}
+    }
+
+    // Cookie consent logic
+    const banner = document.getElementById('cookie');
+    const ACCEPT = document.getElementById('cookie-accept');
+    const DECLINE = document.getElementById('cookie-decline');
+    const CLOSE = document.getElementById('cookie-close');
+
+    function setConsent(value){
+      localStorage.setItem('cookie_consent', value);
+      if(value === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else {
+        try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){}
+      }
+      banner.style.display = 'none';
+    }
+
+    ACCEPT.addEventListener('click',()=> setConsent('accepted'));
+    DECLINE.addEventListener('click',()=> setConsent('declined'));
+    CLOSE.addEventListener('click',()=> banner.style.display='none');
+
+    (function(){
+      const consent = localStorage.getItem('cookie_consent');
+      if(!consent){ banner.style.display = 'flex'; }
+      else if(consent === 'accepted'){
+        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
+      } else { try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){} }
+    })();
+
+    // last modified
+    (function(){
+      const t = document.getElementById('lastmod');
+      if(t){ t.textContent = document.lastModified || new Date().toISOString().split('T')[0]; }
+      const m = document.querySelector('meta[name="last-modified"]');
+      if(m){ m.setAttribute('content', document.lastModified || new Date().toISOString()); }
+    })();
+  </script>
+
+</body>
+</html>

